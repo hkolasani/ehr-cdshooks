@@ -1,0 +1,46 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "required": [
+        "summary",
+        "indicator",
+        "source"
+    ],
+    "properties": {
+        "summary": {
+            "type": "string"
+        },
+        "detail": {
+            "type": "string"
+        },
+        "indicator": {
+            "type": "string",
+            "enum": [
+                "info",
+                "warning",
+                "critical"
+            ]
+        },
+        "source": {
+            "$ref": "Source.json"
+        },
+        "suggestions": {
+            "type": "array",
+            "items": {
+                "$ref": "Suggestion.json"
+            }
+        },
+        "selectionBehavior": {
+            "type": "string",
+            "enum": [
+                "at-most-one"
+            ]
+        },
+        "links": {
+            "type": "array",
+            "items": {
+                "$ref": "Link.json"
+            }
+        }
+    }
+}

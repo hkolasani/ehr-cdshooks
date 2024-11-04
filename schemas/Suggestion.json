@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "required": [ "label"],
+    "properties": {
+        "label": {
+            "type": "string"
+        },
+        "uuid": {
+            "type": "string"
+        },
+        "actions": {
+            "type": "array",
+            "items": { "$ref": "Action.json" }
+        }   
+    }
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "required": [
+    "hook",
+    "hookInstance",
+    "context"
+  ],
+  "properties": {
+    "hook": {
+      "type": "string",
+      "description": "The hook that triggered this CDS Service call."
+    },
+    "hookInstance": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "fhirServer": {
+      "type": "string",
+      "format": "url"
+    },
+    "fhirAuthorization": {
+      "$ref": "FHIRAuthorization.json"
+    },
+    "context": {
+      "type": "object"
+    },
+    "prefetch": {
+      "type": "object"
+    }
+  }
+}

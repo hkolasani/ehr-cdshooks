@@ -1,0 +1,31 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "required": [
+        "access_token",
+        "token_type",
+        "expires_in",
+        "scope",
+        "subject"
+    ],
+    "properties": {
+        "access_token": {
+            "type": "string"
+        },
+        "token_type": {
+            "type": "string",
+            "enum": [
+                "Bearer"
+            ]
+        },
+        "expires_in": {
+            "type": "integer"
+        },
+        "scope": {
+            "type": "string"
+        },
+        "subject": {
+            "type": "string"
+        }
+    }
+}

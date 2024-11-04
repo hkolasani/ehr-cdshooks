@@ -1,0 +1,70 @@
+app: betty
+service: ehr-integration
+
+frameworkVersion: '3'
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+  - serverless-prune-plugin
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  stage: ${opt:stage, 'dev'}
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - ssm:GetParameter
+          Resource: "*"
+        - Effect: Allow
+          Action:
+            - SNS:Publish
+          Resource: "*"
+  logs:
+    restApi: true
+
+  environment:
+    REGION: ${self:custom.region}
+    CURRENT_STAGE: ${self:custom.currentStage}
+
+custom:
+  name: ehr-integration
+  prune:
+    automatic: true
+    number: 3
+  defaultStage: dev
+  region: us-east-1
+  currentStage: ${opt:stage, self:custom.defaultStage}
+  
+functions:
+  cds-services:
+    handler: functions/api/cds/cds-services.handler
+    timeout: 60
+    events:
+      - http:
+          path: /cds-services
+          method: get
+          cors: true
+          integration: lambda
+          response:
+            statusCodes: ${file(env.yml):response-statusCodes}
+  cds-service:
+    handler: functions/api/cds/cds-service.handler
+    timeout: 60
+    events:
+      - http:
+          path: /cds-services/{id}
+          method: post
+          request:
+            parameters:
+              paths:
+                id: true
+            schema:
+              application/json: ${file(schemas/CDSRequest.json)}
+          cors: true
+          integration: lambda
+          response:
+            statusCodes: ${file(env.yml):response-statusCodes}

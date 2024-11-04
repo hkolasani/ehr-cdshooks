@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "required": [ "type","description"],
+    "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "create",
+            "update",
+            "delete"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "object"
+        }
+      }
+}

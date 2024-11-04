@@ -1,0 +1,15 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "required": [
+        "cards"
+    ],
+    "properties": {
+        "cards": {
+            "type": "array",
+            "items": {
+                "$ref": "Card.json"
+            }
+        }
+    }
+}
